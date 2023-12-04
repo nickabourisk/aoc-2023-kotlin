@@ -15,14 +15,17 @@ fun main() {
         return sum
     }
 
+
     check(142 == part1(readInput("Day01_test1")))
     check(281 == part2(readInput("Day01_test2")))
-    check(55712 == part1(readInput("Day01")))
-    check(55413 == part2(readInput("Day01")))
+
+    val input = readInput("Day01")
+    part1(input).println()
+    part2(input).println()
 }
 
 val digitStrings = listOf(
-    "zero", // it appears none of the inputs use zero so lets add this here to make indexing consistent instead of off-by-one
+    "zero", // it appears none of the inputs use zero so let's add this here to make indexing consistent instead of off-by-one
     "one",
     "two",
     "three",

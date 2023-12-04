@@ -20,9 +20,9 @@ fun main() {
                 if (!possibleGameIDs.contains(gameID)) continue
                 for (color in sample.split(",")) {
                     if (!possibleGameIDs.contains(gameID)) continue
-                    var red   = 0
+                    var red = 0
                     var green = 0
-                    var blue  = 0
+                    var blue = 0
                     if (color.contains("red")) {
                         red = color.replace("red", "").trim().toInt()
                     } else if (color.contains("green")) {
@@ -73,11 +73,6 @@ fun main() {
     check(part2(testInput) == 2286)
 
     val input = readInput("Day02")
-    val part1 = part1(input)
-    part1.println()
-    check(part1 == 2505)
-
-    val part2 = part2(input)
-    part2.println()
-    check(part2 == 70265)
+    part1(input).println()
+    part2(input).println()
 }
