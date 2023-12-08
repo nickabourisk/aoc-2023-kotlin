@@ -11,22 +11,17 @@ fun main() {
                 key to Pair(left.removePrefix("("), right.removeSuffix(")"))
             }
 
-        val start    = "AAA"
-        val end      = "ZZZ"
-        var location = start
         var step     = 0
-
-        do {
+        var location = "AAA"
+        while (location != "ZZZ") {
             val direction = sequence[step % sequence.length]
             location = when (direction) {
-                'L'  -> networkMap[location]!!.first
-                'R'  -> networkMap[location]!!.second
+                'L' -> networkMap[location]!!.first
+                'R' -> networkMap[location]!!.second
                 else -> throw RuntimeException("Sequence should only have 'L' and 'R' directions!")
             }
             step++
         }
-        while (location != end)
-
         return step
     }
 
