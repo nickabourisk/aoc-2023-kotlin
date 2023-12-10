@@ -1,20 +1,8 @@
 fun computeDiffList(list: List<Long>) = list.windowed(2).map { it[1] - it[0] }
 fun isListAllZeros (list: List<Long>) = list.all { it == 0L }
 
-// TODO: convert these predict functions into functional
-fun predictNextValue(list: List<Long>): Long {
-    val listOfLists = ArrayList<List<Long>>()
-
-    listOfLists.add(list)
-    var lastList = list
-    while (!isListAllZeros(lastList)) {
-        lastList = computeDiffList(lastList)
-        listOfLists.add(lastList)
-    }
-    return listOfLists.sumOf { it.last() }
-}
-
-fun predictPreviousValue(list: List<Long>): Long {
+// TODO: compute this using functional patterns only
+fun computeListOfDiffLists(list: List<Long>): ArrayList<List<Long>> {
     val listOfLists = ArrayList<List<Long>>()
 
     listOfLists.add(list)
@@ -24,27 +12,14 @@ fun predictPreviousValue(list: List<Long>): Long {
         listOfLists.add(lastList)
     }
     return listOfLists
-                     .reversed()
-                     .map { it.first() }
-                     .reduce { acc, it ->
-                        it - acc
-                     }
 }
 
-fun main() {
-    fun part1(input: List<String>): Long {
-        return input.map { line ->
-            line.split(" ").map { it.toLong() }
-        }
-        .sumOf { predictNextValue(it) }
-    }
+fun predictNextValue(list: List<Long>) = computeListOfDiffLists(list).sumOf { it.last() }
+fun predictPrevValue(list: List<Long>) = computeListOfDiffLists(list).reversed().map { it.first() }.reduce { acc, it -> it - acc }
 
-    fun part2(input: List<String>): Long {
-        return input.map { line ->
-            line.split(" ").map { it.toLong() }
-        }
-        .sumOf { predictPreviousValue(it) }
-    }
+fun main() {
+    fun part1(input: List<String>) = input.map { line -> line.split(" ").map { it.toLong() } }.sumOf { predictNextValue(it) }
+    fun part2(input: List<String>) = input.map { line -> line.split(" ").map { it.toLong() } }.sumOf { predictPrevValue(it) }
 
     val testInput1 = readInput("Day09_test1")
     val input      = readInput("Day09")

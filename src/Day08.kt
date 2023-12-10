@@ -12,9 +12,10 @@ fun lowestCommonMultiple(a: Long, b: Long): Long {
 }
 data class NetworkMap(val sequence: String, val map: Map<String, Pair<String, String>>) {
     private fun nextLocation(location: String, step: Int): String {
-        val direction = sequence[step % sequence.length]
-        return if (direction == 'L') map[location]!!.first
-               else                  map[location]!!.second
+        return when (sequence[step % sequence.length]) {
+            'L'  -> map[location]!!.first
+            else -> map[location]!!.second
+        }
     }
 
     fun stepsUntil(startLocation: String, targetLocations: List<String>, startStep: Int = 0): Int {
